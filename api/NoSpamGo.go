@@ -2,11 +2,10 @@ package main
 
 import (
 	dataprovider "NoSpamGo/dataProvider"
-	"fmt"
+	"NoSpamGo/usecases"
 	"log"
-	"strings"
 
-	"github.com/emersion/go-imap"
+	"github.com/emersion/go-imap/client"
 )
 
 func main() {
@@ -15,44 +14,18 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	imapBox, err := dataprovider.ImapClientConnector(arguments.ImapUrl, arguments.Port, arguments.UserName, arguments.Password)
+
+	var unseenMessagesGetter usecases.IUnseenMessagesGetter[*client.Client] = new(dataprovider.ImapClientUnseenMessagesGetter)
+	var spamMover usecases.ISpamMover[*client.Client] = new(dataprovider.ImapClientSpamMover)
+	var clientConnector usecases.IClientConnector[*client.Client] = new(dataprovider.ImapClientConnector)
+
+	err = clientConnector.Connect(arguments.ImapUrl, arguments.Port, arguments.UserName, arguments.Password)
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer imapBox.Logout()
+	defer clientConnector.Close()
 
-	messages := dataprovider.ImapClientUnseenMessagesGetter(imapBox)
-
-	if messages == nil {
-		return
-	}
-
-	spamUIDs := new(imap.SeqSet)
-
-	for msg := range messages {
-		enveloppe := msg.Envelope
-
-		for _, addressOrigin := range enveloppe.From {
-			fmt.Printf("SeqNum: %d\n", msg.SeqNum)
-			fmt.Printf("PersonalName: %s\n", addressOrigin.PersonalName)
-			fmt.Printf("MailboxName: %s\n", addressOrigin.MailboxName)
-			fmt.Printf("HostName: %s\n", addressOrigin.HostName)
-			fmt.Printf("Email complet: %s@%s\n", addressOrigin.MailboxName, addressOrigin.HostName)
-			if strings.Contains(strings.ToLower(addressOrigin.PersonalName), "happy promos") {
-				spamUIDs.AddNum(msg.SeqNum)
-				fmt.Println("!! SPAM !! ")
-			}
-		}
-		fmt.Printf("Sujet: %s\n", enveloppe.Subject)
-
-		fmt.Println("------------------------")
-	}
-
-	if !spamUIDs.Empty() {
-		if err := imapBox.Move(spamUIDs, "Junk"); err != nil {
-			log.Fatal(err)
-		}
-	}
+	usecases.SpamDetector(clientConnector, unseenMessagesGetter, spamMover)
 
 	log.Println("Done!")
 }
