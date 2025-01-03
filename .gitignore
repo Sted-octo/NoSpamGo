@@ -28,3 +28,6 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+/api/.vscode/launch.json
+/api/data.db
+/front/.vscode/extensions.json
