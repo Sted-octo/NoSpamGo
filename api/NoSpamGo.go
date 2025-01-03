@@ -1,31 +1,22 @@
 package main
 
 import (
-	dataprovider "NoSpamGo/dataProvider"
-	"NoSpamGo/usecases"
-	"log"
+	"NoSpamGo/controllers"
+	"fmt"
+	"net/http"
 
-	"github.com/emersion/go-imap/client"
+	"github.com/gorilla/mux"
 )
 
 func main() {
 
-	arguments, err := dataprovider.EnvironmentVariableGetter()
-	if err != nil {
-		log.Fatal(err)
-	}
+	router := mux.NewRouter()
 
-	var unseenMessagesGetter usecases.IUnseenMessagesGetter[*client.Client] = new(dataprovider.ImapClientUnseenMessagesGetter)
-	var spamMover usecases.ISpamMover[*client.Client] = new(dataprovider.ImapClientSpamMover)
-	var clientConnector usecases.IClientConnector[*client.Client] = new(dataprovider.ImapClientConnector)
+	router.HandleFunc("/setup-2fa", controllers.Setup2FactorsHandler).Methods("POST")
+	router.HandleFunc("/verify-2fa", controllers.Verify2FactorsHandler).Methods("POST")
+	router.HandleFunc("/spam-detector", controllers.SpamDetectorHandler).Methods("POST")
+	router.HandleFunc("/alive", controllers.Setup2FactorsHandler).Methods("GET")
 
-	err = clientConnector.Connect(arguments.ImapUrl, arguments.Port, arguments.UserName, arguments.Password)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer clientConnector.Close()
-
-	usecases.SpamDetector(clientConnector, unseenMessagesGetter, spamMover)
-
-	log.Println("Done!")
+	fmt.Println("Serveur démarré sur :8080")
+	http.ListenAndServe(":8080", router)
 }
