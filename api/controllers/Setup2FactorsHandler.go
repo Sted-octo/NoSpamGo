@@ -5,10 +5,11 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/julienschmidt/httprouter"
 	"github.com/pquerna/otp/totp"
 )
 
-func Setup2FactorsHandler(w http.ResponseWriter, r *http.Request) {
+func Setup2FactorsHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	var user domain.User
 	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)

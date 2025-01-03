@@ -7,9 +7,10 @@ import (
 	"net/http"
 
 	"github.com/emersion/go-imap/client"
+	"github.com/julienschmidt/httprouter"
 )
 
-func SpamDetectorHandler(w http.ResponseWriter, r *http.Request) {
+func SpamDetectorHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	arguments, err := dataprovider.EnvironmentVariableGetter()
 	if err != nil {
 		log.Fatal(err)

@@ -5,10 +5,11 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/julienschmidt/httprouter"
 	"github.com/pquerna/otp/totp"
 )
 
-func Verify2FactorsHandler(w http.ResponseWriter, r *http.Request) {
+func Verify2FactorsHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	var req Verify2FARequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
