@@ -1,6 +1,6 @@
 package controllers
 
 type Verify2FARequest struct {
-	Username string `json:"username"`
-	Token    string `json:"token"`
+	Mail  string `json:"mail"`
+	Token string `json:"token"`
 }
