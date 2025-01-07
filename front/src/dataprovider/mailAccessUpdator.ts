@@ -1,10 +1,11 @@
 import { API_CONFIG } from './config'
 import type { MailConfig, MailConfigUpdateResponse } from '@/domain/mailConfig'
+import type { User } from '@/dataprovider/User.ts'
 
 export class MailAccessUpdator {
   static async updateMailConfig(request: MailConfig): Promise<MailConfigUpdateResponse> {
     try {
-      const user = {
+      const user = <User>{
         Mail: request.mail,
         ImapUsername: request.username,
         ImapPassword: request.password,
