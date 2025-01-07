@@ -3,11 +3,13 @@ package controllers
 import (
 	dataprovider "NoSpamGo/dataProvider"
 	"NoSpamGo/domain"
+	"NoSpamGo/tools"
 	"NoSpamGo/usecases"
 	"database/sql"
 	"encoding/json"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/pquerna/otp/totp"
@@ -24,12 +26,17 @@ func Setup2FactorsHandler(w http.ResponseWriter, r *http.Request, ps httprouter.
 
 	var userSaver usecases.IUserSaver[*sql.DB] = new(dataprovider.UserSaver)
 	var userByMailLoader usecases.IUserByMailLoader[*sql.DB] = new(dataprovider.UserByMailLoader)
+	var cryptoHelper usecases.ICryptoHelper = tools.NewCryptoHelper([]byte(os.Getenv("CRYPTO_KEY")))
 
-	setup2Factors(w, r, dbConnector, userSaver, userByMailLoader)
+	setup2Factors(w, r, dbConnector, userSaver, userByMailLoader, cryptoHelper)
 
 }
 
-func setup2Factors(w http.ResponseWriter, r *http.Request, dbConnector usecases.IDatabaseConnector[*sql.DB], userSaver usecases.IUserSaver[*sql.DB], userByMailLoader usecases.IUserByMailLoader[*sql.DB]) {
+func setup2Factors(w http.ResponseWriter, r *http.Request,
+	dbConnector usecases.IDatabaseConnector[*sql.DB],
+	userSaver usecases.IUserSaver[*sql.DB],
+	userByMailLoader usecases.IUserByMailLoader[*sql.DB],
+	cryptoHelper usecases.ICryptoHelper) {
 	var user domain.User
 	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -52,7 +59,7 @@ func setup2Factors(w http.ResponseWriter, r *http.Request, dbConnector usecases.
 		ImapPassword:   "",
 		ImapServerUrl:  "",
 		ImapServerPort: 0,
-	}, dbConnector, userByMailLoader)
+	}, dbConnector, userByMailLoader, cryptoHelper)
 
 	response := struct {
 		Secret string `json:"secret"`

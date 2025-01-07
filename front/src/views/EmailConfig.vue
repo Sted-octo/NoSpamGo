@@ -65,7 +65,7 @@ export default defineComponent({
 
         if (result.saved) {
           setTimeout(() => {
-            router.push('/dashboard')
+            router.push(`/dashboard/${encodeURIComponent(config.mail)}`)
           }, 2000)
         }
       } catch (err) {

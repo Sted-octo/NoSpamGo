@@ -68,8 +68,20 @@ button:hover {
   padding: 15px;
   margin-bottom: 10px;
   border-radius: 4px;
+  background-color: lightgray;
 }
 
 .message-card p {
   margin: 5px 0;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.container > div,
+.container > button {
+  flex: 1 1 300px;
 }

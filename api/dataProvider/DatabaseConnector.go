@@ -24,6 +24,7 @@ func (connector *DatabaseConnector) Connect() error {
 			secret BLOB,
 			mailbox_username TEXT,
             mailbox_password BLOB,
+			mailbox_password_nonce BLOB,
             mailbox_server TEXT,
             mailbox_port INTEGER
         );

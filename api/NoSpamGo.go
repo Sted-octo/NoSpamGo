@@ -54,6 +54,7 @@ func main() {
 	router.POST("/spam-detector", controllers.SpamDetectorHandler)
 	router.GET("/alive", controllers.AliveHandler)
 	router.POST("/update-mail-access", controllers.UpdateMailAccessHandler)
+	router.GET("/unseen-messages-headers/:email", controllers.UnseenMessageHeadersHandler)
 
 	middleware := middlewareOne(router)
 

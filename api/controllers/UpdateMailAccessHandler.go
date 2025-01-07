@@ -3,11 +3,13 @@ package controllers
 import (
 	dataprovider "NoSpamGo/dataProvider"
 	"NoSpamGo/domain"
+	"NoSpamGo/tools"
 	"NoSpamGo/usecases"
 	"database/sql"
 	"encoding/json"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/julienschmidt/httprouter"
 )
@@ -28,8 +30,9 @@ func UpdateMailAccessHandler(w http.ResponseWriter, r *http.Request, ps httprout
 
 	var userByMailLoader usecases.IUserByMailLoader[*sql.DB] = new(dataprovider.UserByMailLoader)
 	var userSaver usecases.IUserSaver[*sql.DB] = new(dataprovider.UserSaver)
+	var cryptoHelper usecases.ICryptoHelper = tools.NewCryptoHelper([]byte(os.Getenv("CRYPTO_KEY")))
 
-	saved := userSaver.Save(user, dbConnector, userByMailLoader)
+	saved := userSaver.Save(user, dbConnector, userByMailLoader, cryptoHelper)
 
 	response := struct {
 		Saved bool `json:"saved"`

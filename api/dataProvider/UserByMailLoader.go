@@ -16,8 +16,8 @@ func (o *UserByMailLoader) Load(mail string, dbConnector usecases.IDatabaseConne
 	}
 
 	var userDb = new(User)
-	row := dbConnector.Get().QueryRow("SELECT mail, secret, mailbox_username, mailbox_password, mailbox_server, mailbox_port FROM users WHERE mail = ?", mail)
-	err := row.Scan(&userDb.Mail, &userDb.Secret, &userDb.ImapUsername, &userDb.ImapPassword, &userDb.ImapServerUrl, &userDb.ImapServerPort)
+	row := dbConnector.Get().QueryRow("SELECT mail, secret, mailbox_username, mailbox_password, mailbox_password_nonce, mailbox_server, mailbox_port FROM users WHERE mail = ?", mail)
+	err := row.Scan(&userDb.Mail, &userDb.Secret, &userDb.ImapUsername, &userDb.ImapPassword, &userDb.ImapPasswordNonce, &userDb.ImapServerUrl, &userDb.ImapServerPort)
 
 	if err == sql.ErrNoRows {
 		return nil
