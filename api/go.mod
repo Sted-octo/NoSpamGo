@@ -4,6 +4,8 @@ go 1.23.4
 
 require (
 	github.com/emersion/go-imap v1.2.1
+	github.com/golang-jwt/jwt/v5 v5.2.1
+	github.com/gorilla/context v1.1.2
 	github.com/gorilla/handlers v1.5.2
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/pquerna/otp v1.4.0

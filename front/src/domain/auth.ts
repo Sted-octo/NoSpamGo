@@ -10,4 +10,9 @@ export interface TwoFactorVerifyRequest {
 
 export interface TwoFactorVerifyResponse {
   valid: boolean
+  token: string
+}
+
+export interface User {
+  email: string
 }

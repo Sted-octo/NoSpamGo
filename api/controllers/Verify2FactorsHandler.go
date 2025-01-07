@@ -2,11 +2,13 @@ package controllers
 
 import (
 	dataprovider "NoSpamGo/dataProvider"
+	"NoSpamGo/tools"
 	"NoSpamGo/usecases"
 	"database/sql"
 	"encoding/json"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/pquerna/otp/totp"
@@ -47,9 +49,23 @@ func verify2Factors(w http.ResponseWriter,
 	valid := totp.Validate(req.Token, user.Secret)
 
 	response := struct {
-		Valid bool `json:"valid"`
+		Valid bool   `json:"valid"`
+		Token string `json:"token,omitempty"`
 	}{
 		Valid: valid,
+		Token: "",
+	}
+
+	if valid {
+		jwtKey := os.Getenv("JWT_KEY")
+
+		token, err := tools.GenerateToken(user.Mail, jwtKey)
+		if err != nil {
+			log.Printf("Error generating jwt token : %s \r\n", err)
+			http.Error(w, "Error generating token", http.StatusInternalServerError)
+			return
+		}
+		response.Token = token
 	}
 
 	w.Header().Set("Content-Type", "application/json")

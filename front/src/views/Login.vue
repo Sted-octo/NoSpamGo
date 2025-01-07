@@ -23,6 +23,8 @@
 import { defineComponent, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { Auth2FactorVerificator } from '@/dataprovider/auth2FactorVerificator'
+import { useAuthStore } from '@/stores/auth'
+import type { User } from '@/domain/auth'
 
 export default defineComponent({
   // eslint-disable-next-line vue/multi-word-component-names
@@ -32,7 +34,6 @@ export default defineComponent({
     const email = ref<string>('')
     const authCode = ref<string>('')
     const isLoading = ref<boolean>(false)
-    const verificationResult = ref<boolean | null>(null)
     const error = ref<string | null>(null)
 
     const verifyCode = async () => {
@@ -45,12 +46,13 @@ export default defineComponent({
           token: authCode.value,
         })
 
-        verificationResult.value = result.valid
-
         if (result.valid) {
           setTimeout(() => {
-            verificationResult.value = null
             authCode.value = ''
+            const user = <User>{ email: email.value }
+
+            const authStore = useAuthStore()
+            authStore.setAuth(result.token, user)
             router.push(`/email-config/${encodeURIComponent(email.value)}`)
           }, 2000)
         }
