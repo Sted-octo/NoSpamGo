@@ -48,12 +48,16 @@ func verify2Factors(w http.ResponseWriter,
 
 	valid := totp.Validate(req.Token, user.Secret)
 
+	isMailConfigOk := !(user.ImapUsername == "" && user.ImapPassword == "" && user.ImapServerUrl == "" && user.ImapServerPort == 0)
+
 	response := struct {
-		Valid bool   `json:"valid"`
-		Token string `json:"token,omitempty"`
+		Valid          bool   `json:"valid"`
+		Token          string `json:"token,omitempty"`
+		IsMailConfigOk bool   `json:"ismailconfigok"`
 	}{
-		Valid: valid,
-		Token: "",
+		Valid:          valid,
+		Token:          "",
+		IsMailConfigOk: isMailConfigOk,
 	}
 
 	if valid {

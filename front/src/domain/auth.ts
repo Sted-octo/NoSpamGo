@@ -11,6 +11,7 @@ export interface TwoFactorVerifyRequest {
 export interface TwoFactorVerifyResponse {
   valid: boolean
   token: string
+  ismailconfigok: boolean
 }
 
 export interface User {

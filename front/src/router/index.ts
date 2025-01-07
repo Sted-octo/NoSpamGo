@@ -4,7 +4,6 @@ import Register from '@/views/Register.vue'
 import EmailConfig from '@/views/EmailConfig.vue'
 import Dashboard from '@/views/Dashboard.vue'
 import { useAuthStore } from '@/stores/auth'
-import { storeToRefs } from 'pinia'
 
 const routes = [
   {
@@ -31,10 +30,11 @@ const routes = [
     props: true,
   },
   {
-    path: '/dashboard',
+    path: '/dashboard/:email',
     name: 'Dashboard',
     component: Dashboard,
     meta: { requiresAuth: true },
+    props: true,
   },
 ]
 

@@ -53,6 +53,10 @@ export default defineComponent({
 
             const authStore = useAuthStore()
             authStore.setAuth(result.token, user)
+            if (result.ismailconfigok) {
+              router.push(`/dashboard/${encodeURIComponent(email.value)}`)
+              return
+            }
             router.push(`/email-config/${encodeURIComponent(email.value)}`)
           }, 2000)
         }
