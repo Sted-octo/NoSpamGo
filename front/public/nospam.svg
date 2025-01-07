@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="95.357239mm"
+   height="59.154617mm"
+   viewBox="0 0 95.357239 59.154617"
+   version="1.1"
+   id="svg1"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-21.586197,-30.060042)">
+    <path
+       style="fill:#ffd005;fill-opacity:1;stroke:#000000;stroke-width:0.428476;stroke-linecap:round;stroke-miterlimit:0.1;stroke-opacity:1"
+       d="M 66.671833,30.274281 H 22.843906 l -1.04352,49.045531 h 42.784401 l -2.087043,-9.391695 6.782892,-6.782894 -9.391696,-9.391696 8.348176,-9.3917 -5.739372,-8.348177 z"
+       id="path2" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.7556px;font-family:Harrington;-inkscape-font-specification:'Harrington, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-linecap:round;stroke-miterlimit:0.1;stroke-opacity:1"
+       x="56.623611"
+       y="48.405563"
+       id="text2"><tspan
+         sodipodi:role="line"
+         id="tspan2"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.7556px;font-family:Harrington;-inkscape-font-specification:'Harrington, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3"
+         x="56.623611"
+         y="48.405563">N</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.7556px;font-family:Harrington;-inkscape-font-specification:'Harrington, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-linecap:round;stroke-miterlimit:0.1;stroke-opacity:1"
+       x="51.37603"
+       y="71.418816"
+       id="text4"><tspan
+         sodipodi:role="line"
+         id="tspan4"
+         style="fill:#000000;stroke-width:0.3"
+         x="51.37603"
+         y="71.418816">SP</tspan></text>
+    <g
+       id="g5">
+      <g
+         id="g6"
+         transform="rotate(12.929408,64.584787,79.319812)">
+        <path
+           style="fill:#6200ab;fill-opacity:1;stroke:#000000;stroke-width:0.428476;stroke-linecap:round;stroke-miterlimit:0.1;stroke-opacity:1"
+           d="m 66.671833,30.274281 h 40.158947 l 1.04352,49.045531 H 64.584787 l -2.087043,-9.391695 6.782892,-6.782894 -9.391696,-9.391696 8.348176,-9.3917 -5.739372,-8.348177 z"
+           id="path2-4"
+           sodipodi:nodetypes="cccccccccc" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.7556px;font-family:Harrington;-inkscape-font-specification:'Harrington, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-linecap:round;stroke-miterlimit:0.1;stroke-opacity:1"
+           x="75.123436"
+           y="48.404057"
+           id="text3"><tspan
+             sodipodi:role="line"
+             id="tspan3"
+             style="fill:#ffffff;stroke-width:0.3"
+             x="75.123436"
+             y="48.404057">O</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.7556px;font-family:Harrington;-inkscape-font-specification:'Harrington, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-linecap:round;stroke-miterlimit:0.1;stroke-opacity:1"
+           x="84.005119"
+           y="71.312706"
+           id="text5"><tspan
+             sodipodi:role="line"
+             id="tspan5"
+             style="fill:#ffffff;stroke-width:0.3"
+             x="84.005119"
+             y="71.312706">AM</tspan></text>
+      </g>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.7556px;font-family:Harrington;-inkscape-font-specification:'Harrington, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-linecap:round;stroke-miterlimit:0.1;stroke-opacity:1"
+         x="32.512913"
+         y="47.285088"
+         id="text6"><tspan
+           sodipodi:role="line"
+           id="tspan6"
+           style="fill:#ff0000;stroke-width:0.3"
+           x="32.512913"
+           y="47.285088">@</tspan></text>
+    </g>
+  </g>
+</svg>

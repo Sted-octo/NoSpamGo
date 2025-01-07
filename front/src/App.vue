@@ -1,16 +1,29 @@
 <template>
-  <div class="min-h-screen bg-gray-100">
-    <TwoFactorAuth />
+  <div class="app">
+    <header>
+      <img src="/nospam.svg" alt="Logo" class="logo" />
+    </header>
+    <router-view></router-view>
   </div>
 </template>
 
 <script lang="ts">
-import TwoFactorAuth from './components/TwoFactorAuth.vue'
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   name: 'App',
-  components: {
-    TwoFactorAuth
-  }
-}
+})
 </script>
+
+<style>
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.logo {
+  height: 50px;
+  margin-bottom: 20px;
+}
+</style>

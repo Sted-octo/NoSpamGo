@@ -15,8 +15,18 @@ func (o *UserByMailLoader) Load(mail string, dbConnector usecases.IDatabaseConne
 		log.Fatal("Database access error in service UserSaver")
 	}
 
-	var user domain.User
-	row := dbConnector.Get().QueryRow("SELECT mail, secret FROM users WHERE mail = ?", mail)
-	row.Scan(&user.Mail, &user.Secret)
-	return &user
+	var userDb = new(User)
+	row := dbConnector.Get().QueryRow("SELECT mail, secret, mailbox_username, mailbox_password, mailbox_server, mailbox_port FROM users WHERE mail = ?", mail)
+	err := row.Scan(&userDb.Mail, &userDb.Secret, &userDb.ImapUsername, &userDb.ImapPassword, &userDb.ImapServerUrl, &userDb.ImapServerPort)
+
+	if err == sql.ErrNoRows {
+		return nil
+	}
+
+	if err != nil {
+		log.Printf("erreur lors de la requête : %v", err)
+		return nil
+	}
+
+	return userDb.ToDomain()
 }

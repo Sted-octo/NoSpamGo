@@ -23,11 +23,13 @@ func Setup2FactorsHandler(w http.ResponseWriter, r *http.Request, ps httprouter.
 	defer dbConnector.Close()
 
 	var userSaver usecases.IUserSaver[*sql.DB] = new(dataprovider.UserSaver)
-	setup2Factors(w, r, dbConnector, userSaver)
+	var userByMailLoader usecases.IUserByMailLoader[*sql.DB] = new(dataprovider.UserByMailLoader)
+
+	setup2Factors(w, r, dbConnector, userSaver, userByMailLoader)
 
 }
 
-func setup2Factors(w http.ResponseWriter, r *http.Request, dbConnector usecases.IDatabaseConnector[*sql.DB], userSaver usecases.IUserSaver[*sql.DB]) {
+func setup2Factors(w http.ResponseWriter, r *http.Request, dbConnector usecases.IDatabaseConnector[*sql.DB], userSaver usecases.IUserSaver[*sql.DB], userByMailLoader usecases.IUserByMailLoader[*sql.DB]) {
 	var user domain.User
 	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -44,10 +46,13 @@ func setup2Factors(w http.ResponseWriter, r *http.Request, dbConnector usecases.
 	}
 
 	userSaver.Save(domain.User{
-		Mail:         user.Mail,
-		Secret:       key.Secret(),
-		IsEnabled2FA: true,
-	}, dbConnector)
+		Mail:           user.Mail,
+		Secret:         key.Secret(),
+		ImapUsername:   "",
+		ImapPassword:   "",
+		ImapServerUrl:  "",
+		ImapServerPort: 0,
+	}, dbConnector, userByMailLoader)
 
 	response := struct {
 		Secret string `json:"secret"`

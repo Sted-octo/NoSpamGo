@@ -29,6 +29,7 @@ func main() {
 	router.POST("/verify-2fa", controllers.Verify2FactorsHandler)
 	router.POST("/spam-detector", controllers.SpamDetectorHandler)
 	router.GET("/alive", controllers.AliveHandler)
+	router.POST("/update-mail-access", controllers.UpdateMailAccessHandler)
 
 	middleware := middlewareTwo(router)
 

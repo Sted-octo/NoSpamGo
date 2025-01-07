@@ -1,7 +1,10 @@
 package domain
 
 type User struct {
-	Mail         string `json:"Mail"`
-	Secret       string `json:"Secret,omitempty"`
-	IsEnabled2FA bool   `json:"IsEnabled2FA"`
+	Mail           string `json:"Mail"`
+	Secret         string `json:"Secret,omitempty"`
+	ImapUsername   string `json:"ImapUsername,omitempty"`
+	ImapPassword   string `json:"ImapPassword,omitempty"`
+	ImapServerUrl  string `json:"ImapServerUrl,omitempty"`
+	ImapServerPort int    `json:"ImapServerPort,omitempty"`
 }
