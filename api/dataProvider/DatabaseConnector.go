@@ -19,15 +19,22 @@ func (connector *DatabaseConnector) Connect() error {
 	}
 
 	_, err = connector.Db.Exec(`
-        CREATE TABLE IF NOT EXISTS users (
-            mail TEXT PRIMARY KEY,
+		CREATE TABLE IF NOT EXISTS users (
+			mail TEXT PRIMARY KEY,
 			secret BLOB,
 			mailbox_username TEXT,
-            mailbox_password BLOB,
+			mailbox_password BLOB,
 			mailbox_password_nonce BLOB,
-            mailbox_server TEXT,
-            mailbox_port INTEGER
-        );
+			mailbox_server TEXT,
+			mailbox_port INTEGER
+		);
+
+		CREATE TABLE IF NOT EXISTS filters (
+			mail TEXT,
+			filter_name TEXT,
+			filter_number_of_spam_detected INTEGER,
+			PRIMARY KEY (mail, filter_name)
+		);
 	`)
 	if err != nil {
 		log.Fatal(err)

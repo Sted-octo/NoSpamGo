@@ -1,4 +1,4 @@
 export interface Filter {
-  name: string
-  usage: number
+  Name: string
+  NumberOfSpamDetected: number
 }

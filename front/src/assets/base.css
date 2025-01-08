@@ -55,7 +55,6 @@
 *::after {
   box-sizing: border-box;
   margin: 0;
-  font-weight: normal;
 }
 
 body {
@@ -84,4 +83,3 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-

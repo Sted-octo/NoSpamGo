@@ -1,10 +1,11 @@
 import { API_CONFIG } from './config'
-import type { MailConfig, MailConfigUpdateResponse } from '@/domain/mailConfig'
+import type { MailConfig } from '@/domain/mailConfig'
+import type { SavedResponse } from '@/domain/SavedResponse'
 import type { User } from '@/dataprovider/User.ts'
 import api from './api'
 
 export class MailAccessUpdator {
-  static async updateMailConfig(request: MailConfig): Promise<MailConfigUpdateResponse> {
+  static async updateMailConfig(request: MailConfig): Promise<SavedResponse> {
     try {
       const user = <User>{
         Mail: request.mail,
@@ -14,7 +15,7 @@ export class MailAccessUpdator {
         ImapServerPort: request.port,
       }
 
-      const { data } = await api.post<MailConfigUpdateResponse>(
+      const { data } = await api.post<SavedResponse>(
         API_CONFIG.BASE_URL + API_CONFIG.ENDPOINTS.UPDATE_MAIL_ACCESS,
         user,
       )

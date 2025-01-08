@@ -55,6 +55,8 @@ func main() {
 	router.GET("/alive", controllers.AliveHandler)
 	router.POST("/update-mail-access", controllers.UpdateMailAccessHandler)
 	router.GET("/unseen-messages-headers/:email", controllers.UnseenMessageHeadersHandler)
+	router.POST("/filter-saver", controllers.FiltersSaverHandler)
+	router.GET("/filters/:email", controllers.FiltersHandler)
 
 	middleware := middlewareOne(router)
 

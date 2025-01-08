@@ -85,3 +85,8 @@ button:hover {
 .container > button {
   flex: 1 1 300px;
 }
+
+.is-spam {
+  border: 2px solid red;
+  background-color: lightpink;
+}

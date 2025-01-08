@@ -6,6 +6,6 @@ export interface MailConfig {
   port: number
 }
 
-export interface MailConfigUpdateResponse {
+export interface SavedResponse {
   saved: boolean
 }
