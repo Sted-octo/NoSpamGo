@@ -7,5 +7,6 @@ export const API_CONFIG = {
     UNSEEN_MESSAGES_HEADERS: '/unseen-messages-headers',
     FILTERS_SAVER: '/filter-saver',
     FILTERS: '/filters',
+    SPAM_DETECTOR: '/spam-detector',
   },
 }

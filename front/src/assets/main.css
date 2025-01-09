@@ -17,16 +17,20 @@
 }
 
 button {
-  background-color: #4caf50;
-  color: white;
+  background-color: #ffd005;
+  color: black;
   padding: 10px 15px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin: 5px;
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #fbf0bf;
+  border-color: #6200ab;
+  border-width: 1px;
+  border: inherit;
 }
 
 .login-form,
@@ -64,11 +68,20 @@ button:hover {
 }
 
 .message-card {
-  border: 1px solid #ddd;
+  border: 1px solid #6200ab;
   padding: 15px;
   margin-bottom: 10px;
   border-radius: 4px;
-  background-color: lightgray;
+  background-color: #9276a8;
+  color: white;
+}
+
+.filter-card {
+  border: 1px solid #ffd005;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  background-color: #feec9b;
 }
 
 .message-card p {
@@ -89,4 +102,21 @@ button:hover {
 .is-spam {
   border: 2px solid red;
   background-color: lightpink;
+  color: black;
+}
+
+.table {
+  display: flex;
+  justify-content: space-between; /* Optionnel : espace entre les colonnes */
+}
+.column {
+  flex: 1; /* Optionnel : chaque colonne prend une part égale de l'espace disponible */
+  padding: 10px;
+  vertical-align: middle;
+}
+
+.big-text {
+  font-weight: bolder;
+  font-size: x-large;
+  text-align: center;
 }

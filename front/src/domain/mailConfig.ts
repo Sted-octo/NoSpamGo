@@ -6,6 +6,3 @@ export interface MailConfig {
   port: number
 }
 
-export interface SavedResponse {
-  saved: boolean
-}

@@ -31,7 +31,7 @@ func (o *FilterSaver) Save(
 		return true
 	}
 
-	stmt, _ := dbConnector.Get().Prepare("UPDATE filter set filter_number_of_spam_detected = ? where mail = ? and filter_name = ?")
+	stmt, _ := dbConnector.Get().Prepare("UPDATE filters set filter_number_of_spam_detected = ? where mail = ? and filter_name = ?")
 	_, err := stmt.Exec(filter.NumberOfSpamDetected, mail, filter.Name)
 	if err != nil {
 		log.Println(err)

@@ -27,8 +27,12 @@
       <div>
         <h3>{{ filters.length }} filtres</h3>
 
-        <div v-for="filter in filterCounts" :key="filter.Name" class="message-card">
-          <p>{{ filter.Name }} ({{ filter.spamCount }} messages détectés)</p>
+        <div v-for="filter in filterCounts" :key="filter.Name" class="filter-card">
+          <div class="table">
+            <div class="column">{{ filter.Name }}</div>
+            <div class="column">{{ filter.spamCount }} nouveaux spans</div>
+            <div class="column big-text">{{ filter.NumberOfSpamDetected }}</div>
+          </div>
         </div>
       </div>
       <div>
@@ -57,6 +61,7 @@ import { type Filter } from '@/domain/filter'
 import { UnseenMessageLoader } from '@/dataprovider/unseenMessagesLoader'
 import { FiltesSaver } from '@/dataprovider/filtersSaver'
 import { FiltersGetter } from '@/dataprovider/filtersGetter'
+import { SpamDetector } from '@/dataprovider/spamDetector'
 
 export default defineComponent({
   // eslint-disable-next-line vue/multi-word-component-names
@@ -113,6 +118,12 @@ export default defineComponent({
           hasNewFilters.value = false
         }
       }
+
+      const state = await SpamDetector.Call(mail.value)
+      if (state.saved) {
+        await fetchMessages()
+        await fetchFilters()
+      }
     }
 
     const isMessageSpam = (message: Message) => {
@@ -151,9 +162,9 @@ export default defineComponent({
       }))
     })
 
-    onMounted(() => {
-      fetchMessages()
-      fetchFilters()
+    onMounted(async () => {
+      await fetchMessages()
+      await fetchFilters()
     })
 
     return {

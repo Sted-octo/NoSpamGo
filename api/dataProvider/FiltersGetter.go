@@ -15,7 +15,12 @@ func (o *FiltersGetter) Get(mail string, dbConnector usecases.IDatabaseConnector
 		log.Fatal("Database access error in service UserSaver")
 	}
 
-	rows, err := dbConnector.Get().Query("SELECT mail, filter_name, filter_number_of_spam_detected FROM filters WHERE mail = ?", mail)
+	rows, err := dbConnector.Get().Query(`
+		SELECT mail, filter_name, filter_number_of_spam_detected 
+		FROM filters 
+		WHERE mail = ?
+		ORDER by filter_number_of_spam_detected DESC
+		`, mail)
 	if err == sql.ErrNoRows {
 		return nil
 	}
