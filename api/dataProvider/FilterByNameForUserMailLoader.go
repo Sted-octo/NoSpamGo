@@ -12,7 +12,8 @@ type FilterByNameForUserMailLoader struct{}
 func (o *FilterByNameForUserMailLoader) Load(mail string, name string, dbConnector usecases.IDatabaseConnector[*sql.DB]) *domain.Filter {
 
 	if dbConnector.Get() == nil {
-		log.Fatal("Database access error in service UserSaver")
+		log.Println("Database access error in service UserSaver")
+		return nil
 	}
 
 	var filterDb = new(Filter)

@@ -18,12 +18,14 @@ func (o *ImapClientUnseenMessagesGetter) Get(clientConnector usecases.IClientCon
 
 	_, err := clientConnector.Get().Select("INBOX", false)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
+		return nil
 	}
 
 	uids, err := clientConnector.Get().Search(criteria)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
+		return nil
 	}
 
 	if len(uids) == 0 {

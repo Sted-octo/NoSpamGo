@@ -12,7 +12,8 @@ type FiltersGetter struct{}
 func (o *FiltersGetter) Get(mail string, dbConnector usecases.IDatabaseConnector[*sql.DB]) []domain.Filter {
 
 	if dbConnector.Get() == nil {
-		log.Fatal("Database access error in service UserSaver")
+		log.Println("Database access error in service UserSaver")
+		return nil
 	}
 
 	rows, err := dbConnector.Get().Query(`

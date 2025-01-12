@@ -5,7 +5,6 @@ import (
 	"NoSpamGo/usecases"
 	"database/sql"
 	"encoding/json"
-	"log"
 	"net/http"
 
 	"github.com/emersion/go-imap/client"
@@ -18,7 +17,8 @@ func UnseenMessageHeadersHandler(w http.ResponseWriter, r *http.Request, ps http
 	var dbConnector usecases.IDatabaseConnector[*sql.DB] = new(dataprovider.DatabaseConnector)
 	err := dbConnector.Connect()
 	if err != nil {
-		log.Fatal(err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 	defer dbConnector.Close()
 
@@ -36,7 +36,8 @@ func UnseenMessageHeadersHandler(w http.ResponseWriter, r *http.Request, ps http
 
 	err = clientConnector.Connect(user.ImapServerUrl, user.ImapServerPort, user.ImapUsername, user.ImapPassword)
 	if err != nil {
-		log.Fatal(err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 	defer clientConnector.Close()
 

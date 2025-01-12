@@ -13,7 +13,10 @@ type DatabaseConnector struct {
 
 func (connector *DatabaseConnector) Connect() error {
 	var err error
-	connector.Db, err = sql.Open("sqlite", "data.db")
+
+	dbPath := "data.db"
+
+	connector.Db, err = sql.Open("sqlcipher", dbPath)
 	if err != nil {
 		return err
 	}
@@ -37,7 +40,7 @@ func (connector *DatabaseConnector) Connect() error {
 		);
 	`)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 	return nil
 }

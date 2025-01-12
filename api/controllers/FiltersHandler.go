@@ -5,7 +5,6 @@ import (
 	"NoSpamGo/usecases"
 	"database/sql"
 	"encoding/json"
-	"log"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
@@ -17,7 +16,8 @@ func FiltersHandler(w http.ResponseWriter, r *http.Request, ps httprouter.Params
 	var dbConnector usecases.IDatabaseConnector[*sql.DB] = new(dataprovider.DatabaseConnector)
 	err := dbConnector.Connect()
 	if err != nil {
-		log.Fatal(err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 	defer dbConnector.Close()
 

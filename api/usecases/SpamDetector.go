@@ -13,14 +13,14 @@ func SpamDetector[T any, S any](email string,
 	filtersGetter IFiltersGetter[S],
 	dbConnector IDatabaseConnector[S],
 	filterSaver IFilterSaver[S],
-	filterByNameForUserMailLoader IFilterByNameForUserMailLoader[S]) {
+	filterByNameForUserMailLoader IFilterByNameForUserMailLoader[S]) int {
 
 	var ids []uint32
 	var filtersUsed []string
 	messages := unseenMessagesGetter.Get(clientConnector)
 
 	if messages == nil {
-		return
+		return 0
 	}
 	filters := filtersGetter.Get(email, dbConnector)
 	filterMap := make(map[string]*domain.Filter)
@@ -65,4 +65,5 @@ func SpamDetector[T any, S any](email string,
 	if len(ids) > 0 {
 		spamMover.Move(clientConnector, ids)
 	}
+	return len(ids)
 }

@@ -7,7 +7,6 @@ import (
 	"NoSpamGo/usecases"
 	"database/sql"
 	"encoding/json"
-	"log"
 	"net/http"
 	"os"
 
@@ -20,7 +19,7 @@ func Setup2FactorsHandler(w http.ResponseWriter, r *http.Request, ps httprouter.
 	var dbConnector usecases.IDatabaseConnector[*sql.DB] = new(dataprovider.DatabaseConnector)
 	err := dbConnector.Connect()
 	if err != nil {
-		log.Fatal(err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 	defer dbConnector.Close()
 

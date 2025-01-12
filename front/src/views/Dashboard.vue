@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <div class="container scrollable-section" v-if="messages.length">
+    <div class="container scrollable-section">
       <div>
         <h3>{{ filters.length }} filtres</h3>
 
@@ -62,6 +62,8 @@ import { UnseenMessageLoader } from '@/dataprovider/unseenMessagesLoader'
 import { FiltesSaver } from '@/dataprovider/filtersSaver'
 import { FiltersGetter } from '@/dataprovider/filtersGetter'
 import { SpamDetector } from '@/dataprovider/spamDetector'
+import { toast } from 'vue3-toastify'
+import 'vue3-toastify/dist/index.css'
 
 export default defineComponent({
   // eslint-disable-next-line vue/multi-word-component-names
@@ -86,13 +88,16 @@ export default defineComponent({
 
     const fetchMessages = async (): Promise<void> => {
       const datas = await UnseenMessageLoader.load(props.email)
-
+      if (datas === null) {
+        messages.value = []
+        return
+      }
       messages.value = datas
     }
 
     const fetchFilters = async (): Promise<void> => {
       const datas = await FiltersGetter.get(props.email)
-
+      if (datas === null) console.log('Datas filters  null')
       filters.value = datas
     }
 
@@ -119,11 +124,16 @@ export default defineComponent({
         }
       }
 
-      const state = await SpamDetector.Call(mail.value)
-      if (state.saved) {
+      const response = await SpamDetector.Call(mail.value)
+      response.forEach(async (result) => {
+        if (result.Mail === mail.value) {
+          toast(result.CountSpamDetected + ' spam(s) déplacé(s)', {
+            autoClose: 3000,
+          })
+        }
         await fetchMessages()
         await fetchFilters()
-      }
+      })
     }
 
     const isMessageSpam = (message: Message) => {

@@ -12,7 +12,8 @@ type UserByMailLoader struct{}
 func (o *UserByMailLoader) Load(mail string, dbConnector usecases.IDatabaseConnector[*sql.DB]) *domain.User {
 
 	if dbConnector.Get() == nil {
-		log.Fatal("Database access error in service UserSaver")
+		log.Println("Database access error in service UserSaver")
+		return nil
 	}
 
 	var userDb = new(User)

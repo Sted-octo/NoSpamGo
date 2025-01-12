@@ -1,15 +1,15 @@
 import { API_CONFIG } from './config'
-import type { SavedResponse } from '@/domain/SavedResponse'
-import type { Email } from '@/dataprovider/email'
+import type { SpamDetectorResult } from '@/dataprovider/spamDetectorResult'
+import type { Emails } from '@/dataprovider/emails'
 import api from './api'
 
 export class SpamDetector {
-  static async Call(email: string): Promise<SavedResponse> {
+  static async Call(email: string): Promise<SpamDetectorResult[]> {
     try {
-      const params = <Email>{
-        mail: email,
+      const params = <Emails>{
+        mails: [email],
       }
-      const { data } = await api.post<SavedResponse>(
+      const { data } = await api.post<SpamDetectorResult[]>(
         API_CONFIG.BASE_URL + API_CONFIG.ENDPOINTS.SPAM_DETECTOR,
         params,
       )

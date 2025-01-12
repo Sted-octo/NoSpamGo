@@ -20,8 +20,7 @@ func (o *ImapClientSpamMover) Move(clientConnector usecases.IClientConnector[*cl
 
 	if !spamUIDs.Empty() {
 		if err := clientConnector.Get().Move(spamUIDs, "Junk"); err != nil {
-			log.Fatal(err)
+			log.Println(err)
 		}
 	}
-
 }
